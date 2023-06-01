@@ -23,7 +23,6 @@ int main()
             transpose[j][i] = matrix[i][j];
         }
     }
-
     printf("Original Matrix:\n");
     for (int i = 0; i < ROWS; i++)
     {
