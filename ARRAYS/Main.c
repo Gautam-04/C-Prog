@@ -101,11 +101,11 @@ void Insertion(int nums[])
             printf("Enter the position You want to add element:- ");
             scanf("%d", &pos);
             n++;
-            for (i = n; i > pos; i--)
+            for (i = n; i > pos-1; i--)
             {
                 nums[i] = nums[i - 1];
             }
-            nums[pos] = x;
+            nums[pos-1] = x;
             printf("Updated array is :- ");
             for (i = 0; i < n; i++)
             {
@@ -122,16 +122,72 @@ void Insertion(int nums[])
 //Performs Task for deletion
 void Deletion(int nums[])
 {
+    int n = 10;
+    int pos, i;
+
+    printf("Enter the position you want to delete:- ");
+    scanf("%d", &pos);
+    n--;
+    for (i = pos - 1; i < n; i++)
+    {
+        nums[i] = nums[i + 1];
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        printf("%d\t", nums[i]);
+    }
 }
 
 //Performs task for sorting
 void Sorting(int nums[])
 {
+    int i, n = 10;
+    // run the steps n-1 time
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 1; j < n - i; j++)
+        {
+            if (nums[j] < nums[j - 1])
+            {
+                // swap
+                int temp = nums[j];
+                nums[j] = nums[j - 1];
+                nums[j - 1] = temp;
+            }
+        }
+    }
+    for (i = 0; i < n; i++)
+    {
+        printf("%d\t", nums[i]);
+    }
 }
 
 //Performs task for Searching
 void Searching(int nums[])
 {
+    int x, y, z, i, n = 10;
+    // run the steps n-1 time
+    printf("Enter element you want to search:- ");
+    scanf("%d", &x);
+
+    for (i = 0; i < n; i++)
+    {
+        if (x == nums[i])
+        {
+            y++;
+            z = i + 1;
+        }
+    }
+
+    if (y == 1)
+    {
+        printf("Element is found at position %d", z);
+    }
+    else
+    {
+        printf("Element not found");
+    }
 }
 // Performs task for Merging
 void Merging(int nums[])
