@@ -29,37 +29,45 @@ int main()
         originalNums[i] = nums[i];
     }
 
-    // Display menu for array operations
-    printf("\nChoose a Method from the below list:\n1.Insertion\n2.Deletion\n3.Sorting\n4.Searching\n5.Merging.\nSelect a number to perform the particular task: ");
-    scanf("%d", &r);
+    int shouldContinue = 1;
 
-    if (1 <= r && r <= 5)
+    while (shouldContinue)
     {
-        switch (r)
+        // Display menu for array operations
+        printf("\nChoose a Method from the below list:\n1.Insertion\n2.Deletion\n3.Sorting\n4.Searching\n5.Merging.\n6.Exit\nSelect a number to perform the particular task: ");
+        scanf("%d", &r);
+
+        if (1 <= r && r <= 6)
         {
-        case 1:
-            Insertion(nums, n);
-            break;
-        case 2:
-            Deletion(nums, n);
-            break;
-        case 3:
-            Sorting(nums, n);
-            break;
-        case 4:
-            Searching(nums, n);
-            break;
-        case 5:
-            Merging(nums, n);
-            break;
-        default:
-            printf("Invalid option.\n");
-            break;
-        };
-    }
-    else
-    {
-        printf("Enter Correct Number (Range 1-5)\n");
+            switch (r)
+            {
+            case 1:
+                Insertion(nums, n);
+                break;
+            case 2:
+                Deletion(nums, n);
+                break;
+            case 3:
+                Sorting(nums, n);
+                break;
+            case 4:
+                Searching(nums, n);
+                break;
+            case 5:
+                Merging(nums, n);
+                break;
+            case 6:
+                shouldContinue = 0; // Set the flag to exit the loop
+                break;
+            default:
+                printf("Invalid option.\n");
+                break;
+            };
+        }
+        else
+        {
+            printf("Enter Correct Number (Range 1-6)\n");
+        }
     }
 
     // Print the original array for comparison
@@ -72,85 +80,37 @@ int main()
     return 0;
 }
 
-// Function to perform Insertion in the array
 void Insertion(int nums[], int n)
 {
     int y, pos, x, i;
+    int shouldContinue = 1;
 
-    // Ask the user where they want to add the element
-    printf("Enter where you want to add your element:\n1.Beginning\n2.End\n3.Random: ");
-    scanf("%d", &y);
-
-    // Check if the input is valid (1, 2, or 3)
-    if (1 <= y && y <= 3)
+    while (shouldContinue)
     {
-        if (y == 1)
+        // Ask the user where they want to add the element
+        printf("Enter where you want to add your element:\n1.Beginning\n2.End\n3.Random\n4.Exit: ");
+        scanf("%d", &y);
+
+        // Check if the input is valid (1, 2, 3, or 4)
+        if (1 <= y && y <= 4)
         {
-            // Add element in the beginning of the array
-            printf("Enter the element you want to enter: ");
-            scanf("%d", &x);
-
-            // Since the array size will increase when we add a number
-            n++;
-
-            // Shift elements to the right to make space for the new element at the beginning
-            for (i = n; i > 0; i--)
+            if (y == 1)
             {
-                nums[i] = nums[i - 1];
-            }
+                // Add element in the beginning of the array
+                printf("Enter the element you want to enter: ");
+                scanf("%d", &x);
 
-            // Insert the new element at the beginning
-            nums[0] = x;
-
-            // Print the updated array
-            printf("Updated array is: ");
-            for (i = 0; i < n; i++)
-            {
-                printf("%d ", nums[i]);
-            }
-        }
-        else if (y == 2)
-        {
-            // Add element in the end of the array
-            printf("Enter the element you want to enter: ");
-            scanf("%d", &x);
-
-            // Since the array size will increase when we add a number
-            n++;
-
-            // Insert the new element at the end
-            nums[n - 1] = x;
-
-            // Print the updated array
-            printf("Updated array is: ");
-            for (i = 0; i < n; i++)
-            {
-                printf("%d ", nums[i]);
-            }
-        }
-        else
-        {
-            // Add element in any random location
-            printf("Enter the element you want to enter: ");
-            scanf("%d", &x);
-
-            printf("Enter the position you want to add element: ");
-            scanf("%d", &pos);
-
-            // Check if the position is within the valid range
-            if (pos >= 1 && pos <= n + 1)
-            {
                 // Since the array size will increase when we add a number
                 n++;
 
-                // Shift elements to the right to make space for the new element at the desired position
-                for (i = n; i > pos - 1; i--)
+                // Shift elements to the right to make space for the new element at the beginning
+                for (i = n; i > 0; i--)
                 {
                     nums[i] = nums[i - 1];
                 }
 
-                // Insert the new element at the desired position
-                nums[pos - 1] = x;
+                // Insert the new element at the beginning
+                nums[0] = x;
 
                 // Print the updated array
                 printf("Updated array is: ");
@@ -159,15 +119,70 @@ void Insertion(int nums[], int n)
                     printf("%d ", nums[i]);
                 }
             }
-            else
+            else if (y == 2)
             {
-                printf("Invalid position. Enter a position between 1 and %d.\n", n + 1);
+                // Add element in the end of the array
+                printf("Enter the element you want to enter: ");
+                scanf("%d", &x);
+
+                // Since the array size will increase when we add a number
+                n++;
+
+                // Insert the new element at the end
+                nums[n - 1] = x;
+
+                // Print the updated array
+                printf("Updated array is: ");
+                for (i = 0; i < n; i++)
+                {
+                    printf("%d ", nums[i]);
+                }
+            }
+            else if (y == 3)
+            {
+                // Add element in any random location
+                printf("Enter the element you want to enter: ");
+                scanf("%d", &x);
+
+                printf("Enter the position you want to add element: ");
+                scanf("%d", &pos);
+
+                // Check if the position is within the valid range
+                if (pos >= 1 && pos <= n + 1)
+                {
+                    // Since the array size will increase when we add a number
+                    n++;
+
+                    // Shift elements to the right to make space for the new element at the desired position
+                    for (i = n; i > pos - 1; i--)
+                    {
+                        nums[i] = nums[i - 1];
+                    }
+
+                    // Insert the new element at the desired position
+                    nums[pos - 1] = x;
+
+                    // Print the updated array
+                    printf("Updated array is: ");
+                    for (i = 0; i < n; i++)
+                    {
+                        printf("%d ", nums[i]);
+                    }
+                }
+                else
+                {
+                    printf("Invalid position. Enter a position between 1 and %d.\n", n + 1);
+                }
+            }
+            else if (y == 4)
+            {
+                shouldContinue = 0; // Set the flag to exit the loop
             }
         }
-    }
-    else
-    {
-        printf("Invalid input. Enter a number between 1 and 3.\n");
+        else
+        {
+            printf("Invalid input. Enter a number between 1 and 4.\n");
+        }
     }
 }
 
@@ -175,21 +190,41 @@ void Insertion(int nums[], int n)
 void Deletion(int nums[], int n)
 {
     int pos, i;
-    // Ask the user for the position of the element to delete
-    printf("Enter the position you want to delete: ");
-    scanf("%d", &pos);
-    // Reduce the array size by one to remove the element at the given position
-    n--;
-    // Shift elements to the left, starting from the position to delete
-    for (i = pos - 1; i < n; i++)
+    int shouldContinue = 1;
+
+    while (shouldContinue)
     {
-        nums[i] = nums[i + 1];
-    }
-    // Print the updated array after deletion
-    printf("Updated array is: ");
-    for (i = 0; i < n; i++)
-    {
-        printf("%d ", nums[i]);
+        // Ask the user for the position of the element to delete
+        printf("Enter the position you want to delete: ");
+        scanf("%d", &pos);
+
+        // Check if the position is within the valid range
+        if (pos >= 1 && pos <= n)
+        {
+            // Reduce the array size by one to remove the element at the given position
+            n--;
+
+            // Shift elements to the left, starting from the position to delete
+            for (i = pos - 1; i < n; i++)
+            {
+                nums[i] = nums[i + 1];
+            }
+
+            // Print the updated array after deletion
+            printf("Updated array is: ");
+            for (i = 0; i < n; i++)
+            {
+                printf("%d ", nums[i]);
+            }
+        }
+        else
+        {
+            printf("Invalid position. Enter a position between 1 and %d.\n", n);
+        }
+
+        // Ask if the user wants to continue or exit
+        printf("\nDo you want to delete another element? (1: Yes, 0: No): ");
+        scanf("%d", &shouldContinue);
     }
 }
 
@@ -266,26 +301,44 @@ void Merging(int nums[], int n)
     {
         scanf("%d", &merge[i]);
     }
+    Sorting(nums,n);
+    Sorting(merge,a);
 
-    // Merge the two arrays
-    int i, j;
-    for (i = 0; i < a; i++)
+    int i = 0, j = 0, k = 0;
+    while (i < n && j < a)
     {
-        merged[i] = merge[i];
+        if (nums[i] < merge[j])
+        {
+            merged[k] = nums[i];
+            i++;
+        }
+        else
+        {
+            merged[k] = merge[j];
+            j++;
+        }
+        k++;
     }
 
-    for (j = 0; j < n; j++)
+    while (i < n)
     {
-        merged[i + j] = nums[j];
+        merged[k] = nums[i];
+        i++;
+        k++;
     }
 
-    Sorting(merged,final);
+    while (j < a)
+    {
+        merged[k] = merge[j];
+        j++;
+        k++;
+    }
 
-    // printf("The merged array is:\n");
-    // for (int k = 0; k < final; k++)
-    // {
-    //     printf("%d ", merged[k]); // Add a space between elements for readability
-    // }
+    printf("The merged and sorted array is:\n");
+    for (int m = 0; m < final; m++)
+    {
+        printf("%d ", merged[m]); // Add a space between elements for readability
+    }
 
-    // printf("\n");
+    printf("\n");
 }
