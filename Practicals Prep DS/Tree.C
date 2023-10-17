@@ -15,43 +15,20 @@ struct Node *create_tree()
 
 struct Node *insertElement(struct Node *tree, int val)
 {
-    struct Node *ptr, *parentPtr, *nodeptr;
-    ptr = (struct Node *)malloc(sizeof(struct Node));
-    ptr->data = val;
-    ptr->left = NULL;
-    ptr->right = NULL;
-
     if (tree == NULL)
     {
-        return ptr; // Return the new node as the root
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = val;
+        newNode->left = newNode->right = NULL;
+        return newNode;
     }
-    else
-    {
-        parentPtr = NULL;
-        nodeptr = tree;
-        while (nodeptr != NULL)
-        {
-            parentPtr = nodeptr;
-            if (val < nodeptr->data)
-            {
-                nodeptr = nodeptr->left;
-            }
-            else
-            {
-                nodeptr = nodeptr->right;
-            }
-        }
-        if (val < parentPtr->data)
-        {
-            parentPtr->left = ptr;
-        }
-        else
-        {
-            parentPtr->right = ptr;
-        }
-    }
-    printf("\n %d is entered into tree", val);
-    return tree; // Return the root node after insertion
+
+    if (val < tree->data)
+        tree->left = insertElement(tree->left, val);
+    else if (val > tree->data)
+        tree->right = insertElement(tree->right, val);
+
+    return tree;
 }
 
 void Preorder(struct Node *tree)
