@@ -9,7 +9,7 @@ int pop(int st[]);
 int peek(int st[]);
 void display(int st[]);
 
-int main(int argc, char *argv[])
+int main()
 {
     push(st, 9);
     push(st, 98);
