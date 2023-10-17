@@ -23,12 +23,12 @@ struct Node *insertElement(struct Node *tree, int val)
 
     if (tree == NULL)
     {
-       return ptr;
+        return ptr; // Return the new node as the root
     }
     else
     {
         parentPtr = NULL;
-        nodeptr = ptr;
+        nodeptr = tree;
         while (nodeptr != NULL)
         {
             parentPtr = nodeptr;
@@ -51,7 +51,7 @@ struct Node *insertElement(struct Node *tree, int val)
         }
     }
     printf("\n %d is entered into tree", val);
-    return tree;
+    return tree; // Return the root node after insertion
 }
 
 void Preorder(struct Node *tree)
@@ -84,6 +84,29 @@ void Postorder(struct Node *tree)
     }
 }
 
+void BFS(struct Node *tree)
+{
+    if (tree == NULL)
+        return;
+
+    struct Node *queue[1000]; // A queue to store nodes
+    int front = -1, rear = -1;
+
+    queue[++rear] = tree; // Enqueue the root node
+
+    while (front != rear)
+    {
+        struct Node *current = queue[++front]; // Dequeue the front node
+        printf("\t %d ", current->data);
+
+        if (current->left != NULL)
+            queue[++rear] = current->left; // Enqueue the left child
+
+        if (current->right != NULL)
+            queue[++rear] = current->right; // Enqueue the right child
+    }
+}
+
 int main()
 {
     struct Node *tree = create_tree();
@@ -104,5 +127,7 @@ int main()
     printf("\nPostorder: ");
     Postorder(tree);
 
+    printf("\nBFS: ");
+    BFS(tree);
     return 0;
 }
